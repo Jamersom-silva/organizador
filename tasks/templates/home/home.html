@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Organizador de Tarefas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        .content {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .links a {
+            padding: 15px 30px;
+            font-size: 1.3em;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            width: 250px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .links a:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+        }
+        .links a:active {
+            transform: translateY(1px);
+        }
+        @media (max-width: 768px) {
+            .links a {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bem-vindo ao Organizador de Tarefas</h1>
+    <p>Gerencie suas tarefas de forma simples e eficaz</p>
+</header>
+
+<div class="content">
+    <div class="links">
+        <a href="{% url 'task_list' %}">Minhas Tarefas</a>
+        <a href="{% url 'task_create' %}">Criar Nova Tarefa</a>
+        <a href="{% url 'completed_tasks' %}">Tarefas Concluídas</a>  <!-- Link para Tarefas Concluídas -->
+    </div>
+</div>
+
+</body>
+</html>

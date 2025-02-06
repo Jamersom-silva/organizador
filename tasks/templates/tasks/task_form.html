@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ form.instance.pk|default:"Criar Tarefa" }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .links {
+            margin-bottom: 20px;
+        }
+        .links a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container form button,
+        .form-container form a {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .form-container form button {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-container form a {
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .form-container form a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ form.instance.pk|default:"Criar Tarefa" }}</h1>
+    
+    <div class="links">
+        <a href="{% url 'home' %}">Voltar para a página inicial</a>  
+        <a href="{% url 'completed_tasks' %}">Tarefas Concluídas</a>  
+        <a href="{% url 'task_list' %}">Voltar para Minhas Tarefas</a>
+    </div>
+
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Exibe os campos do formulário -->
+
+            <button type="submit">Salvar</button>
+
+            <a href="{% url 'task_list' %}">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

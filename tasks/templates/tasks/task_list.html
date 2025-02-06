@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Tarefas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .task-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .task-links a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .task-links a:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+        }
+        .task-links a:active {
+            transform: translateY(1px);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 12px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-actions a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .task-actions a:hover {
+            color: #0056b3;
+        }
+        .filters {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 30px;
+        }
+        .filters a {
+            background-color: #f1f1f1;
+            padding: 12px 18px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        .filters a:hover {
+            background-color: #ddd;
+        }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .task-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .task-links a {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            .filters {
+                flex-direction: column;
+            }
+            .filters a {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Minhas Tarefas</h1>
+    
+    <div class="container">
+        <div class="task-links">
+            <a href="{% url 'home' %}">Voltar para a Página Inicial</a>
+            <a href="{% url 'task_create' %}">Criar Nova Tarefa</a>
+            <a href="{% url 'completed_tasks' %}">Tarefas Concluídas</a>
+        </div>
+
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <div>
+                        <strong>{{ task.title }}</strong> - 
+                        <span style="font-weight: normal;">{{ task.completed|yesno:"Concluída,Pendente" }}</span>
+                    </div>
+                    <div class="task-actions">
+                        <a href="{% url 'task_update' task.pk %}">Editar</a>
+                        <a href="{% url 'task_delete' task.pk %}">Excluir</a>
+                    </div>
+                </li>
+            {% empty %}
+                <p>Não há tarefas registradas.</p>
+            {% endfor %}
+        </ul>
+
+        <div class="filters">
+            <a href="?status=all">Todas</a>
+            <a href="?status=completed">Concluídas</a>
+            <a href="?status=pending">Pendentes</a>
+        </div>
+    </div>
+</body>
+</html>

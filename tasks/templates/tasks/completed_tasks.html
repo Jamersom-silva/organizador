@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas Concluídas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .links {
+            margin-bottom: 20px;
+        }
+        .links a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .task-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .task-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .task-list li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .task-list li:last-child {
+            margin-bottom: 0;
+        }
+        .no-tasks {
+            font-size: 16px;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tarefas Concluídas</h1>
+    
+    <div class="links">
+        <a href="{% url 'home' %}">Voltar para a página inicial</a>  
+        <a href="{% url 'task_list' %}">Minhas Tarefas</a>  
+        <a href="{% url 'task_create' %}">Criar Nova Tarefa</a>
+    </div>
+    
+    <div class="task-list">
+        {% if tasks %}
+            <ul>
+                {% for task in tasks %}
+                    <li>{{ task.title }} - Concluída</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-tasks">Não há tarefas concluídas.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
